@@ -18,5 +18,6 @@ Klik je op 1 van de lijnen dan gebeuren er 2 dingen:
 
 2.	Dan begint de feestsimulatie te draaien. Personen worden weergegeven in bolletjes, elke keer als een uniek persoon een eerste betaling heeft gedaan verschijnt deze als bolletje in de ruimte. Elke extra betaling gaat het bolletje iets meer heen en weer bewegen. Wanneer groepsbetaling worden gedaan bewegen desbetreffende bolletjes na elkaar toe. Zo wordt door de tijd heengelopen. 
 
-####Afbeelding landingspagina
+####Afbeeldingen landingspagina studieverenigingspagina
 ![alt text](https://github.com/stanleykelder/Project/blob/master/progplan1.png "Landingspagina")
+![alt text](https://github.com/stanleykelder/Project/blob/master/progplan2.png "Pagina studievereniging")
