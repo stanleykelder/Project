@@ -15,5 +15,5 @@ Klik je op 1 van de lijnen dan gebeuren er 2 dingen:
 1.	Dan krijg je de statistieken te zien van die dag in een bar graph (totaal besteed, totaal consumpties, totaal unieke besteders, totaal groepsbetalingen, ...).
 2.	Dan begint de feestsimulatie te draaien. Personen worden weergegeven in bolletjes, elke keer als een uniek persoon een eerste betaling heeft gedaan verschijnt deze als bolletje in de ruimte. Elke extra betaling gaat het bolletje iets meer heen en weer bewegen. Wanneer groepsbetaling worden gedaan bewegen desbetreffende bolletjes na elkaar toe. Zo wordt door de tijd heengelopen. 
 
-####Afbeeldinig landingspagina
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+####Afbeelding landingspagina
+![alt text](https://github.com/stanleykelder/Project/blob/master/progplan1.png "Landingspagina")
