@@ -11,8 +11,11 @@ Op de landingspagina zijn de logo’s te zien van de studieverenigingen. Als je 
 
 ###Per studievereniging:
 Per studievereniging is er een multiline graph te zien waarin elke lijn een datum voorstelt en op de assen de tijd en het bedrag dat is uitgegeven staan.
+
 Klik je op 1 van de lijnen dan gebeuren er 2 dingen:
+
 1.	Dan krijg je de statistieken te zien van die dag in een bar graph (totaal besteed, totaal consumpties, totaal unieke besteders, totaal groepsbetalingen, ...).
+
 2.	Dan begint de feestsimulatie te draaien. Personen worden weergegeven in bolletjes, elke keer als een uniek persoon een eerste betaling heeft gedaan verschijnt deze als bolletje in de ruimte. Elke extra betaling gaat het bolletje iets meer heen en weer bewegen. Wanneer groepsbetaling worden gedaan bewegen desbetreffende bolletjes na elkaar toe. Zo wordt door de tijd heengelopen. 
 
 ####Afbeelding landingspagina
