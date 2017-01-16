@@ -1,3 +1,5 @@
+EDIT: Data klopt nog, visualisatie is veranderd. Zie drankconsumptie.png in images.
+
 # Project
 Minor programmeren
 
@@ -5,6 +7,7 @@ Minor programmeren
 
 ###Data:
 Van 7 avonden is er data over mensen hun drinkgedrag. Deze data bestaan uit gemiddeld 1500 transacties van 200 mensen per avond
+
 
 ###Landingspagina:
 Op de landingspagina zijn de logo’s te zien van de studieverenigingen. Als je hierop klikt kom je bij de statistieken per studievereniging. Hieronder is een balk weergegeven waarbij je met behulp van een dropdown menu twee dingen tussen de studieverenigingen kan vergelijken. In het voorbeeld op de afbeelding is dat bijvoorbeeld de bierconsumptie op het Eerstejaarsweekend.
