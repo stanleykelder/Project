@@ -10,6 +10,10 @@
 function setDataForQ(ButtonQ) {
 var stockdata = [];
 d3.json("spectrumhok.json", function(data) {
+<<<<<<< HEAD
+=======
+    console.log(data)
+>>>>>>> 7956d060b9e949ee330858bc6fe0482880f5e1e7
     // date formats
     var parseTime = d3.timeParse("%d/%m/%Y");
     var formatTime = d3.timeFormat("%d/%m");         
@@ -17,6 +21,7 @@ d3.json("spectrumhok.json", function(data) {
     // adjust data per stock
     // arrays datecut and opencut are used for the axes
     var datecut = [];
+<<<<<<< HEAD
     var drinkcut = [];
     var stockdata = [];
     var stockdata2 = [];
@@ -41,6 +46,20 @@ d3.json("spectrumhok.json", function(data) {
     });
 
     
+=======
+    var opencut = [];
+    var stockdata = [];
+    var stockdata2 = [];
+    var stockdata3 = [];
+    var stockdatatotal= [];
+
+    // select data per stock and quarter
+    data.map(function(d){ 
+        console.log(d.state.on, parseTime(d.state.on.date))
+        datecut.append(parseTime(d.state.on.date));
+    });
+    console.log(datecut)
+>>>>>>> 7956d060b9e949ee330858bc6fe0482880f5e1e7
     // create area for graph
     var svg = d3.select("svg"),
     margin = {top: 50, right: 150, bottom: 30, left: 50},
@@ -56,6 +75,7 @@ d3.json("spectrumhok.json", function(data) {
 
     // domains for axes, with use of datecut and opencut arrays
     xScale.domain(d3.extent(datecut));
+<<<<<<< HEAD
     yScale.domain(d3.extent(drinkcut));
 
     console.log(datatotal)
@@ -65,6 +85,16 @@ d3.json("spectrumhok.json", function(data) {
     });
     var yDomain = d3.extent(datatotal, function(d) {
         return d.productsCount;
+=======
+    yScale.domain(d3.extent(opencut));
+
+    // min and max of domains
+    var xDomain = d3.extent(stockdatatotal, function(d) {
+        return d.date;
+    });
+    var yDomain = d3.extent(stockdatatotal, function(d) {
+        return d.open;
+>>>>>>> 7956d060b9e949ee330858bc6fe0482880f5e1e7
     });
 
     // create x axis
@@ -83,7 +113,11 @@ d3.json("spectrumhok.json", function(data) {
         .attr("y", 6)
         .attr("dy", "0.71em")
         .style("text-anchor", "end")
+<<<<<<< HEAD
         .text("Aantal producten");
+=======
+        .text("Opening value ($)");
+>>>>>>> 7956d060b9e949ee330858bc6fe0482880f5e1e7
 
     // title for graph
     g.append("text")
@@ -92,15 +126,26 @@ d3.json("spectrumhok.json", function(data) {
       .attr("text-anchor", "middle")  
       .style("font-size", "35px") 
       .style("text-decoration", "")  
+<<<<<<< HEAD
       .text("Drankconsumptie");
+=======
+      .text("Weekly stock opening values 2011");
+>>>>>>> 7956d060b9e949ee330858bc6fe0482880f5e1e7
 
     // drawing of lines
     var line = d3.line()
     .x(function(d) { return xScale(d.date); })
+<<<<<<< HEAD
     .y(function(d) { return yScale(d.productsCount); });
 
     g.append("path")
         .datum(datatotal)
+=======
+    .y(function(d) { return yScale(d.open); });
+
+    g.append("path")
+        .datum(stockdata)
+>>>>>>> 7956d060b9e949ee330858bc6fe0482880f5e1e7
         .attr("class", "line")
         .attr("d", line)
         .style("stroke", "orangered");
@@ -128,6 +173,7 @@ d3.json("spectrumhok.json", function(data) {
     focus.append("line")
           .attr("id", "crosshairX");
     // vertical crosshairs    
+<<<<<<< HEAD
     // focus.append("line")
     //       .attr("id", "crosshairY1");
     // focus.append("line")
@@ -139,6 +185,19 @@ d3.json("spectrumhok.json", function(data) {
     // var text1 = g.append("text")
     // var text2 = g.append("text")
     // var text3 = g.append("text")
+=======
+    focus.append("line")
+          .attr("id", "crosshairY1");
+    focus.append("line")
+          .attr("id", "crosshairY2");
+    focus.append("line")
+          .attr("id", "crosshairY3");
+
+    // pop-up text of exact values
+    var text1 = g.append("text")
+    var text2 = g.append("text")
+    var text3 = g.append("text")
+>>>>>>> 7956d060b9e949ee330858bc6fe0482880f5e1e7
  
     // stocknames next to corresponding lines
     var stock1 = g.append("text")
@@ -146,6 +205,7 @@ d3.json("spectrumhok.json", function(data) {
     var stock3 = g.append("text")   
 
     stock1.attr("x", xScale(xDomain[1]) + 20)
+<<<<<<< HEAD
         .attr("y", yScale(datatotal[datatotal.length - 1].productsCount) + 13)
         .style("stroke", "orangered") 
         .text( datatotal[datatotal.length - 1].productsCount);    
@@ -218,6 +278,80 @@ d3.json("spectrumhok.json", function(data) {
         
       });  
 // });
+=======
+        .attr("y", yScale(stockdata[stockdata.length - 1].open) + 13)
+        .style("stroke", "orangered") 
+        .text( stockdata[stockdata.length - 1].stock);    
+    stock2.attr("x", xScale(xDomain[1]) + 20)
+        .attr("y", yScale(stockdata2[stockdata2.length - 1].open) + 13)
+        .style("stroke", "green") 
+        .text( stockdata2[stockdata2.length - 1].stock);    
+    stock3.attr("x", xScale(xDomain[1]) + 20)
+        .attr("y", yScale(stockdata3[stockdata3.length - 1].open) + 13)
+        .style("stroke", "steelblue") 
+        .text( stockdata3[stockdata3.length - 1].stock);    
+          
+    // drawing of crosshairs and pop-up texts
+    g.append("rect")
+      .attr("class", "overlay")
+      .attr("width", width)
+      .attr("height", height)
+      .on("mouseover", function() {
+        focus.style("display", null);
+      })
+      .on("mouseout", function() {
+        focus.style("display", "none");
+      })
+      .on("mousemove", function() { 
+        var mouse = d3.mouse(this);
+        var mouseDate = xScale.invert(mouse[0]);
+        var i = bisectDate(stockdata, mouseDate);
+        var d = stockdata[i].date;
+        
+        var x = xScale(d);
+        var y1 = yScale(stockdata[i].open);
+        var y2 = yScale(stockdata2[i].open);
+        var y3 = yScale(stockdata3[i].open);
+        
+        // since data on x are the same only 1 vertical crosshair is needed
+        focus.select("#crosshairX")
+            .attr("x1", x)
+            .attr("y1", yScale(yDomain[1]))
+            .attr("x2", x)
+            .attr("y2", yScale(yDomain[0]));
+        // for each line there is a seperate horizontal crosshair
+        focus.select("#crosshairY1")
+            .attr("x1", xScale(xDomain[1]))
+            .attr("y1", y1)
+            .attr("x2", xScale(xDomain[0]))
+            .attr("y2", y1);
+        focus.select("#crosshairY2")
+            .attr("x1", xScale(xDomain[1]))
+            .attr("y1", y2)
+            .attr("x2", xScale(xDomain[0]))
+            .attr("y2", y2);
+        focus.select("#crosshairY3")
+            .attr("x1", xScale(xDomain[1]))
+            .attr("y1", y3)
+            .attr("x2", xScale(xDomain[0]))
+            .attr("y2", y3);
+        // pop-up text for each horizontal crosshair (each data-line)
+        text1.attr("x", x)
+            .attr("y", y1 - 5)
+            .style("stroke", "orangered") 
+            .text( formatTime(stockdata[i].date)+ "\n$" + stockdata[i].open);
+        text2.attr("x", x)
+            .attr("y", y2 - 5)
+            .style("stroke", "green") 
+            .text( formatTime(stockdata[i].date)+ "\n$" + stockdata2[i].open);
+        text3.attr("x", x)
+            .attr("y", y3 - 5)
+            .style("stroke", "steelblue") 
+            .text( formatTime(stockdata[i].date)+ "\n$" + stockdata3[i].open);
+        
+      });  
+});
+>>>>>>> 7956d060b9e949ee330858bc6fe0482880f5e1e7
 };
 
 // change quarter when button clicked
