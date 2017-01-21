@@ -9,37 +9,50 @@
 // load json file
 function setDataForQ(ButtonQ) {
 var stockdata = [];
-d3.json("spectrumhok.json", function(data) {
+d3.json("payments.json", function(data) {
+    
     // date formats
     var parseTime = d3.timeParse("%d/%m/%Y");
     var formatTime = d3.timeFormat("%d/%m");         
 
     // adjust data per stock
     // arrays datecut and opencut are used for the axes
-    var datecut = [];
-    var drinkcut = [];
-    var stockdata = [];
-    var stockdata2 = [];
-    var stockdata3 = [];
-    var datatotal= [];
-
+    var data = [];
+    var aankopen = [];
+    var Spectrum_totaal = [];
+    var Spectrum_bier = [];
+    var Spectrum_speciaalbier = [];
+    var Spectrum_fris = [];
+    var Spectrum_overig = [];
+    var totaal= [];
+    var Congo_totaal = [];
+    var Congo_bier = [];
+    var Congo_speciaalbier = [];
+    var Congo_fris = [];
+    var Congo_overig = [];
+    
     // select data per stock and quarter
     data.map(function(d){ 
-        // console.log(d.state.on.unix)
-        d.state.on.date = parseTime(d.state.on.date).getTime();
-        // console.log(d.state.on.date);
-        var index = datecut.indexOf(d.state.on.date);
-        if (index > -1) {
-            datatotal[index].productsCount = datatotal[index].productsCount + d.productsCount;
-            drinkcut[index] = datatotal[index].productsCount + d.productsCount;
-        } else {
-            datecut.push(d.state.on.date);
-            d.state.on.productsCount = d.productsCount; 
-            datatotal.push(d.state.on)
-            drinkcut.push(d.productsCount);
-        }
+        if (d.code.localeCompare("IPAD_SPECTRUM") == 0){
+            console.log("got here ")
+            // console.log(d.state.on.unix)
+            d.state.on.date = parseTime(d.state.on.date).getTime();
+            console.log(d.state.on.date)
+            // console.log(d.state.on.date);
+            var index = data.indexOf(d.state.on.date);
+            if (index > -1) {
+                data[index].totaal = data[index].totaal + d.productsCount;
+                aankopen[index] = data[index].totaal;
+            } else {
+                data.push(d.state.on.date);
+                d.state.on.totaal = d.productsCount; 
+                totaal.push(d.state.on)
+                drinkcut.push(d.productsCount);
+            }
+        }   
+        console.log("hallo")
     });
-
+    console.log(data)
     
     // create area for graph
     var svg = d3.select("svg"),
