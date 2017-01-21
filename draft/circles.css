@@ -1,9 +1,20 @@
-text {
-  font: 10px sans-serif;
-  text-anchor: middle;
+/*Stanley Kelder
+10313540.*/
+
+.line {
+  fill: none;
+  stroke: green;
+  stroke-width: 1.5px;
 }
 
-.node--hover circle {
-  stroke: #000;
-  stroke-width: 1.2px;
+.overlay {
+  fill: none;
+  pointer-events: all;
 }
+
+.focus line {
+  fill: none;
+  stroke: gray;
+  opacity: 0.5;
+}
+
