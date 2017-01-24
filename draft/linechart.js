@@ -15,48 +15,119 @@ d3.json("payments.json", function(data) {
     var parseTime = d3.timeParse("%d/%m/%Y");
     var formatTime = d3.timeFormat("%d/%m");         
 
-    // adjust data per stock
-    // arrays datecut and opencut are used for the axes
-    var data = [];
-    var aankopen = [];
-    var Spectrum_totaal = [];
-    var Spectrum_bier = [];
-    var Spectrum_speciaalbier = [];
-    var Spectrum_fris = [];
-    var Spectrum_overig = [];
-    var totaal= [];
-    var Congo_totaal = [];
-    var Congo_bier = [];
-    var Congo_speciaalbier = [];
-    var Congo_fris = [];
-    var Congo_overig = [];
+    // array to fill with data of correct form
+    var dates = [];
+
+    // filter out bad data
+    var data = data.filter(function(d) {
+        if (d.state.on.unix < 1477000800000 || d.state.on.unix > 1482537600000 || d.state.refunded || d.amount.positive) {
+            return false
+        } 
+        return true
+    })
     
-    // select data per stock and quarter
+    // map through original json, create new one in dates
     data.map(function(d){ 
-        if (d.code.localeCompare("IPAD_SPECTRUM") == 0){
-            console.log("got here ")
-            // console.log(d.state.on.unix)
-            d.state.on.date = parseTime(d.state.on.date).getTime();
-            console.log(d.state.on.date)
-            // console.log(d.state.on.date);
-            var index = data.indexOf(d.state.on.date);
-            if (index > -1) {
-                data[index].totaal = data[index].totaal + d.productsCount;
-                aankopen[index] = data[index].totaal;
-            } else {
-                data.push(d.state.on.date);
-                d.state.on.totaal = d.productsCount; 
-                totaal.push(d.state.on)
-                drinkcut.push(d.productsCount);
+        var date = parseTime(d.state.on.date).getTime();   
+        var date_object = {};
+        var date_exists = 0;
+
+        // Make first date object
+        if (dates.length == 0) {
+            date_object["date"] = date;
+            date_object["Spectrum"] = {datum: d.state.on.date, bier: 0, fris: 0, speciaalbier: 0, overig: 0, totaal: 0};
+            date_object["Congo"] = {datum: d.state.on.date, bier: 0, fris: 0, speciaalbier: 0, overig: 0, totaal: 0};
+            dates.push(date_object);
+        }
+
+        // Check if date is same as transaction and add products to object counts
+        dates.map(function(element){
+            if (element.date == date) {
+                date_exists = 1;
+
+                // Check for every product if it is one of the chosen
+                d.products.map(function(product){
+                    idProduct = product._id.$oid;
+                    if (idProduct == "57cd872a3068d0401719d1a3") {
+                        element.Spectrum.bier += 1;
+                        element.Spectrum.totaal += 1;
+                    } else if (idProduct == "57cd87343068d0401719d1b3") {
+                        element.Spectrum.fris += 1;
+                        element.Spectrum.totaal += 1;
+                    } else if (idProduct == "57ed163cc17083e90b377702" || idProduct == "57ed163cc17083e90b377702") {
+                        element.Spectrum.speciaalbier += 1;
+                        element.Spectrum.totaal += 1;
+                    } else if (idProduct == "57cd874c3068d0401719d1c3" || idProduct == "57fd049b72776cf1033b3578") {
+                        element.Spectrum.overig += 1;
+                        element.Spectrum.totaal += 1;
+                    } else if (idProduct == "57c2b4cb7672fa9201fa0aa9") {
+                        element.Congo.bier += 1;
+                        element.Congo.totaal += 1;
+                    } else if (idProduct == "57c2c8dc9bbbd25d75c124df") {
+                        element.Congo.fris += 1;
+                        element.Congo.totaal += 1;
+                    } else if (idProduct == "57c2b4f67672fa9201fa0ab6") {
+                        element.Congo.speciaalbier += 1;
+                        element.Congo.totaal += 1;
+                    } else if (idProduct == "57c2b5197672fa9201fa0ace") {
+                        element.Congo.overig += 1;
+                        element.Congo.totaal += 1;
+                    }
+                });
             }
-        }   
-        console.log("hallo")
+        });
+        if (date_exists == 0) {
+            date_object["date"] = date;
+            date_object["Spectrum"] = {datum: d.state.on.date, bier: 0, fris: 0, speciaalbier: 0, overig: 0, totaal: 0};
+            date_object["Congo"] = {datum: d.state.on.date, bier: 0, fris: 0, speciaalbier: 0, overig: 0, totaal: 0};
+            // Check for every product if it is one of the chosen
+            d.products.map(function(product){
+                idProduct = product._id.$oid;
+                    if (idProduct == "57cd872a3068d0401719d1a3") {
+                        date_object.Spectrum.bier += 1;
+                        date_object.Spectrum.totaal += 1;
+                    } else if (idProduct == "57cd87343068d0401719d1b3") {
+                        date_object.Spectrum.fris += 1;
+                        date_object.Spectrum.totaal += 1;
+                    } else if (idProduct == "57ed163cc17083e90b377702" || idProduct == "57ed163cc17083e90b377702") {
+                        date_object.Spectrum.speciaalbier += 1;
+                        date_object.Spectrum.totaal += 1;
+                    } else if (idProduct == "57cd874c3068d0401719d1c3" || idProduct == "57fd049b72776cf1033b3578") {
+                        date_object.Spectrum.overig += 1;
+                        date_object.Spectrum.totaal += 1;
+                    } else if (idProduct == "57c2b4cb7672fa9201fa0aa9") {
+                        date_object.Congo.bier += 1;
+                        date_object.Congo.totaal += 1;
+                    } else if (idProduct == "57c2c8dc9bbbd25d75c124df") {
+                        date_object.Congo.fris += 1;
+                        date_object.Congo.totaal += 1;
+                    } else if (idProduct == "57c2b4f67672fa9201fa0ab6") {
+                        date_object.Congo.speciaalbier += 1;
+                        date_object.Congo.totaal += 1;
+                    } else if (idProduct == "57c2b5197672fa9201fa0ace") {
+                        date_object.Congo.overig += 1;
+                        date_object.Congo.totaal += 1;
+                    }
+            });
+            dates.push(date_object);
+        }
+
     });
-    console.log(data)
+    function sortDate(data, prop, asc) {
+        data = data.sort(function(a, b) {
+            if (asc) {
+                return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+            } else {
+                return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+            }
+        })
+    }
+    sortDate(dates, 'date', true)
+    console.log(dates)
     
     // create area for graph
     var svg = d3.select("svg"),
-    margin = {top: 50, right: 150, bottom: 30, left: 50},
+    margin = {top: 50, right: 50, bottom: 30, left: 50},
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom,
     g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -68,16 +139,19 @@ d3.json("payments.json", function(data) {
         .rangeRound([height, 0]);
 
     // domains for axes, with use of datecut and opencut arrays
-    xScale.domain(d3.extent(datecut));
-    yScale.domain(d3.extent(drinkcut));
+    xScale.domain(d3.extent(dates, function(d) {
+        return d.date;
+    }));
+    yScale.domain(d3.extent(dates, function(d) {
+        return d.Congo.bier;
+    }));
 
-    console.log(datatotal)
     // min and max of domains
-    var xDomain = d3.extent(datatotal, function(d) {
+    var xDomain = d3.extent(dates, function(d) {
         return d.date;
     });
-    var yDomain = d3.extent(datatotal, function(d) {
-        return d.productsCount;
+    var yDomain = d3.extent(dates, function(d) {
+        return d.Congo.bier;
     });
 
     // create x axis
@@ -108,27 +182,59 @@ d3.json("payments.json", function(data) {
       .text("Drankconsumptie");
 
     // drawing of lines
-    var line = d3.line()
-    .x(function(d) { return xScale(d.date); })
-    .y(function(d) { return yScale(d.productsCount); });
+    // var drawline = function drawLine(prod, color) {
+    //     var line = d3.line()
+    //     .x(function(d) { return xScale(d.date); })
+    //     .y(function(d) { return yScale(d.products.prod); });
 
+    //         g.append("path")
+    //         .datum(dates)
+    //         .attr("class", "line")
+    //         .attr("d", line)
+    //         .style("stroke", color);
+    // }
+
+    // drawline("fris", "orangered");
+    // drawline("bier", "green");
+    var line_Spectrumfris = d3.line()
+    .x(function(d) { return xScale(d.date); })
+    .y(function(d) { return yScale(d.Spectrum.fris); });
+
+    var line_Spectrumbier = d3.line()
+    .x(function(d) { return xScale(d.date); })
+    .y(function(d) { return yScale(d.Spectrum.bier); });
+
+    var line_Congobier = d3.line()
+    .x(function(d) { return xScale(d.date); })
+    .y(function(d) { return yScale(d.Congo.bier); });
+
+    var line_Congofris = d3.line()
+    .x(function(d) { return xScale(d.date); })
+    .y(function(d) { return yScale(d.Congo.fris); });
+    
     g.append("path")
-        .datum(datatotal)
+        .datum(dates)
         .attr("class", "line")
-        .attr("d", line)
+        .attr("d", line_Spectrumfris)
         .style("stroke", "orangered");
 
     g.append("path")
-        .datum(stockdata2)
+        .datum(dates)
         .attr("class", "line")
-        .attr("d", line)
+        .attr("d", line_Spectrumbier)
         .style("stroke", "green");
 
     g.append("path")
-        .datum(stockdata3)
+        .datum(dates)
         .attr("class", "line")
-        .attr("d", line)
+        .attr("d", line_Congobier)
         .style("stroke", "steelblue");
+
+    g.append("path")
+        .datum(dates)
+        .attr("class", "line")
+        .attr("d", line_Congofris)
+        .style("stroke", "yellow");
 
     // create crosshairs
     var focus = g.append("g")
@@ -159,9 +265,9 @@ d3.json("payments.json", function(data) {
     var stock3 = g.append("text")   
 
     stock1.attr("x", xScale(xDomain[1]) + 20)
-        .attr("y", yScale(datatotal[datatotal.length - 1].productsCount) + 13)
+        .attr("y", yScale(dates[dates.length - 1].Spectrum.fris) + 13)
         .style("stroke", "orangered") 
-        .text( datatotal[datatotal.length - 1].productsCount);    
+        .text("fris");    
     // stock2.attr("x", xScale(xDomain[1]) + 20)
     //     .attr("y", yScale(stockdata2[stockdata2.length - 1].open) + 13)
     //     .style("stroke", "green") 
@@ -232,6 +338,7 @@ d3.json("payments.json", function(data) {
       });  
 // });
 };
+
 
 // change quarter when button clicked
 function updateToQ1() {
