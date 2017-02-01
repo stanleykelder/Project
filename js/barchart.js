@@ -1,5 +1,7 @@
 var drawBarchart = function(ver, prod, type) {
 
+console.log(ver, prod, type)
+
 var weekday = d3.timeFormat("%A");
 
 var svg = d3.select("#barchart"),
@@ -11,7 +13,7 @@ var tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(function(d) {
-    return "<strong><span>" + d.value.max + "</span> </strong> ";
+    return "<strong><span>" + eval("d.value." + type) + "</span> </strong> ";
   });
 svg.call(tip);
 
@@ -58,9 +60,9 @@ var g = svg.append("g")
     .enter().append("rect")
       .attr("class", "bar")
       .attr("x", function(d) { return x(d.key); })
-      .attr("y", function(d) { return y(d.value.max); })
+      .attr("y", function(d) { return y(eval("d.value." + type)); })
       .attr("width", x.bandwidth())
-      .attr("height", function(d) { return height - y(d.value.max); })
+      .attr("height", function(d) { return height - y(eval("d.value." + type)); })
       .sort()
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide);
