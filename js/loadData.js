@@ -2,7 +2,7 @@
 var dates = [];
 
 // load json file ADD ERROR
-d3.json("payments.json", function(data) {
+d3.json("data/payments.json", function(data) {
    // date formats
     var parseTime = d3.timeParse("%d/%m/%Y");
 
@@ -128,5 +128,3 @@ d3.json("payments.json", function(data) {
 
     drawCircles();
 });
-
-console.log(dates);

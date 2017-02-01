@@ -22,7 +22,7 @@ var pack = d3.pack()
     .size([diameter - margin, diameter - margin])
     .padding(2);
 
-  d3.json("circle.json", function(error, root) {
+  d3.json("data/circle.json", function(error, root) {
     if (error) throw error;
 
     root = d3.hierarchy(root)
@@ -131,7 +131,6 @@ var pack = d3.pack()
             }) 
           } else {
               var prod = child.data.name.toLowerCase();
-              console.log(prod);
               drawLine(ver, prod, yDom);
             }
         })

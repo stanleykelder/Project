@@ -165,8 +165,6 @@ var drawGraph = function(yDom) {
 // drawing of lines
 var drawLine = function (ver, prod, yDom) {
 
-    console.log(ver, prod)
-
     // create area for graph
     var svg = d3.select("#line-chart"),
     margin = {top: 50, right: 150, bottom: 30, left: 30},
