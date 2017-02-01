@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="d3-tip.js"></script>
+</head>
+
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+<body class="w3-light-grey">
+
+<!-- Top container -->
+<div class="w3-container w3-large w3-padding" style="height: 150px">
+  <!-- <button class="w3-btn w3-hide-large w3-padding-0 w3-hover-text-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button> -->
+  <div class="w3-third">  
+    <div class="w3-dropdown-hover">
+        <div class="w3-container w3-blue-grey w3-padding-16" style="width: 400px">
+          <div class="w3-clear"></div>
+          <center><h1>Welkom!</h1></center>
+        </div>
+        <div class="w3-dropdown-content w3-card-4" style="width:400px">
+        <p> infooooo Vis </p>
+        </div>
+    </div>
+  </div>
+  <div class="w3-quarter">  
+    <div class="w3-dropdown-hover">
+        <div class="w3-container w3-green w3-padding-16" style="width: 400px">
+          <div class="w3-clear"></div>
+          <center><h1>Congo</h1></center>
+        </div>
+        <div class="w3-dropdown-content w3-card-4" style="width:400px">
+        <p> infooooo Congooo </p>
+        </div>
+    </div>
+  </div>
+  <div class="w3-quarter">  
+    <div class="w3-dropdown-hover">
+        <div class="w3-container w3-blue w3-padding-16" style="width: 400px">
+          <div class="w3-clear"></div>
+          <center><h1>Spectrum</h1></center>
+        </div>
+        <div class="w3-dropdown-content w3-card-4" style="width:400px">
+        <p> infooooo Spectrum </p>
+        </div>
+    </div>
+  </div>
+    <span class="w3-right">Made by: Stanley Kelder</span>
+</div>
+
+<!-- <div class="w3-dropdown-hover">London
+  <div class="w3-dropdown-content w3-card-4" style="width:250px">
+    <img src="img_london.jpg" alt="London" style="width:100%">
+    <div class="w3-container">
+      <p>London is the capital city of England.</p>
+      <p>It is the most populous city in the UK.</p>
+    </div>
+  </div>
+</div> -->
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:10px;margin-top:10px;">
+
+  
+  <div class="w3-container w3-section">
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-half">
+        <h5></h5>
+        
+        <svg id="circles" width="800" height="800"><g transform="translate(1,1)"></g></svg>
+
+      </div>
+      <div class="w3-half">
+        <div>
+          <h5></h5>
+          <svg id="line-chart" width="900" height="400"><g transform="translate(1,1)"></g></svg>
+        </div>
+        <div class="w3-display-container">
+          <h5></h5>
+          <div class="w3-padding-32 w3-display-topright">
+            <select id="dropdown">
+              <option value="max" selected="selected">Maximum</option>
+              <option value="avg">Gemiddelde</option>
+              <option value="total">Totaal</option>
+            </select>
+          </div> 
+          <svg id="barchart" width="900" height="400"><g transform="translate(1,1)"></g></svg>
+        </div>
+       </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-light-grey">
+    <p>Powered by <a href="http://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+  </footer>
+
+  <!-- End page content -->
+</div>
+
+<script src="loadData.js"></script>
+<!-- Line chart -->
+<script src="linechart.js"></script>
+<link rel="stylesheet" href="circles.css">
+
+<!-- Packed circles -->
+<link rel="stylesheet" href="circles2.css">
+<script src="circles.js"></script>
+
+<!-- Bar chart -->
+<script src="barchart.js"></script>
+
+<!-- Drawings -->
+<script src="drawings.js"></script>
+
+</body>
+</html>

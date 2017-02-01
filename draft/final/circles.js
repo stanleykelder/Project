@@ -10,14 +10,20 @@ var color = d3.scaleLinear()
     .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
     .interpolate(d3.interpolateHcl);
 
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(function(d) {
+    return "<strong><span>" + d.data.name + "</span> </strong> ";
+  });
+svg.call(tip);
+
 var pack = d3.pack()
     .size([diameter - margin, diameter - margin])
     .padding(2);
 
-  d3.json("flare.json", function(error, root) {
+  d3.json("circle.json", function(error, root) {
     if (error) throw error;
-
-    console.log(root)
 
     root = d3.hierarchy(root)
       .sum(function(d) { return d.size; })
@@ -27,8 +33,6 @@ var pack = d3.pack()
       nodes = pack(root).descendants(),
       view;
 
-    console.log(nodes)
-
     var circle = g.selectAll("circle")
       .data(nodes)
       .enter().append("circle")
@@ -36,8 +40,10 @@ var pack = d3.pack()
         .style("fill", function(d) { return d.children ? color(d.depth) : null; })
         .on("click", function(d) { if (focus !== d) {zoom(d), d3.event.stopPropagation();} 
                                     updateLineChart(d)})
-        .on("mouseover", hovered(true))
-        .on("mouseout", hovered(false));
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide);
+        // .on("mouseover", hovered(true))
+        // .on("mouseout", hovered(false));
 
     var text = g.selectAll("text")
       .data(nodes)
@@ -50,7 +56,6 @@ var pack = d3.pack()
     var node = g.selectAll("circle,text");
 
     svg
-        .style("background", color(-1))
         .on("click", function() { zoom(root); });
 
     zoomTo([root.x, root.y, root.r * 2 + margin]);
@@ -58,7 +63,6 @@ var pack = d3.pack()
     function zoom(d) {
       var focus0 = focus; focus = d;
 
-      // console.log(focus, focus.parent)
 
       var transition = d3.transition()
           .duration(d3.event.altKey ? 7500 : 750)
@@ -82,53 +86,80 @@ var pack = d3.pack()
 
   function hovered(hover) {
     return function(d) {
-      // console.log(d)
       d3.selectAll(d.ancestors().map(function(d) { return d.node; })).classed("node--hover", hover);
     };
   };
 
+  // Change line chart
   function updateLineChart(d) {
-    if(!d.parent) {
-      d3.select("#line-chart").selectAll("*").remove()
+    //  Variables to make the axes dynamic
+    var checkmax = 0;
+    var yDom;
+
+    if (!d.parent) {
+      d3.select("#line-chart").selectAll("*").remove();
+      d3.select("#barchart").selectAll("*").remove();
         d.children.map(function(child) {
           var ver = child.data.name;
             child.children.map(function(deepchild) {
-              if(deepchild.data.name != "Overig") {
+              if (deepchild.data.name != "Overig") {
                 deepchild.children.map(function(baby) {
+                  if (baby.data.size > checkmax) {
+                    checkmax = baby.data.size;
+                    yDom = ver + "." + baby.data.name.toLowerCase();
+                  }
                   var prod = baby.data.name.toLowerCase();
-                  console.log("check:", ver, typeof(ver), prod, typeof(prod))
-                  drawGraph(ver, prod, "green");
+                  drawLine(ver, prod, yDom);
                 })
             }
             })
         })
+      drawGraph(yDom);
     } else if (!d.parent.parent) {
-      d3.select("#line-chart").selectAll("*").remove()
+      d3.select("#line-chart").selectAll("*").remove();
+      d3.select("#barchart").selectAll("*").remove();
       var ver = d.data.name;
         d.children.map(function(child) {
           if(child.data.name != "Overig") {
             child.children.map(function(deepchild) {
-              prod = deepchild.data.name.toLowerCase();
-              drawGraph(ver, prod, "green");
-            })
-          }
+              if (deepchild.data.size > checkmax) {
+                    checkmax = deepchild.data.size;
+                    yDom = ver + "." + deepchild.data.name.toLowerCase();
+                  };
+              var prod = deepchild.data.name.toLowerCase();
+              drawLine(ver, prod, yDom);
+            }) 
+          } else {
+              var prod = child.data.name.toLowerCase();
+              console.log(prod);
+              drawLine(ver, prod, yDom);
+            }
         })
+      drawGraph(yDom);
     } else if (!d.parent.parent.parent) {
       d3.select("#line-chart").selectAll("*").remove()
+     d3.select("#barchart").selectAll("*").remove();
       var ver = d.parent.data.name;
         d.children.map(function(child) {
+          if (child.data.size > checkmax) {
+                    checkmax = child.data.size;
+                    yDom = ver + "." + child.data.name.toLowerCase();
+                  }
           prod = child.data.name.toLowerCase();
-          drawGraph(ver, prod, "green");
+          drawLine(ver, prod, yDom);
         })
+      drawGraph(yDom);
     } else if (!d.parent.parent.parent.parent) {
-      console.log("diep")
       d3.select("#line-chart").selectAll("*").remove()
+      d3.select("#barchart").selectAll("*").remove();
       var ver = d.parent.parent.data.name;
       var prod = d.data.name.toLowerCase();
-      drawGraph(ver, prod, "orangered");
+      yDom = ver + "." + prod;
+      drawLine(ver, prod, yDom);
+      drawGraph(yDom);
+      drawBarchart(ver, prod, d3.select('#dropdown').property('value'));
     }
   }
 });
-
 
 };

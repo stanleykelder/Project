@@ -1,0 +1,31 @@
+{
+  "name" : "totaal",
+ "children": [
+  {
+   "name": "Spectrum",
+   "children": [
+    {
+     "name": "Drank",
+     "children": [
+      {"name": "Bier", "size": 217},
+      {"name": "Speciaalbier", "size": 53},
+      {"name": "Fris", "size": 215}
+     ]
+    },
+    {"name": "Overig", "size": 1}
+    ]
+  },
+  {
+   "name": "Congo",
+   "children": [
+    {"name": "Overig", "size": 41},
+    {
+     "name": "Drank",
+     "children": [
+      {"name": "Speciaalbier", "size": 160},
+      {"name": "Fris", "size": 738},
+      {"name": "Bier", "size": 2541}
+     ]
+    }]
+  }
+]}

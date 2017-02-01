@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-</head>
+// array to fill with data of correct form
+var dates = [];
 
-<body>
-
-<script>
+// load json file ADD ERROR
 d3.json("payments.json", function(data) {
-    
-    // date formats
+   // date formats
     var parseTime = d3.timeParse("%d/%m/%Y");
-    var formatTime = d3.timeFormat("%d/%m");         
 
-    // array to fill with data of correct form
-    var dates = [];
 
     // filter out bad data
     var data = data.filter(function(d) {
-        if (d.state.on.unix < 1477000800000 || d.state.on.unix > 1482537600000 || d.state.refunded || d.amount.positive) {
+        if (d.state.on.unix < 1477094400000 || d.state.on.unix > 1482537600000 || d.state.refunded || d.amount.positive) {
             return false
         } 
         return true
@@ -33,8 +24,8 @@ d3.json("payments.json", function(data) {
         // Make first date object
         if (dates.length == 0) {
             date_object["date"] = date;
-            date_object["Spectrum"] = {datum: d.state.on.date, bier: 0, fris: 0, speciaalbier: 0, overig: 0, totaal: 0};
-            date_object["Congo"] = {datum: d.state.on.date, bier: 0, fris: 0, speciaalbier: 0, overig: 0, totaal: 0};
+            date_object["Spectrum"] = {datum: d.state.on.date, bier: 0, fris: 0, speciaalbier: 0, drankoverig: 0, overig: 0, totaal: 0};
+            date_object["Congo"] = {datum: d.state.on.date, bier: 0, fris: 0, speciaalbier: 0, drankoverig: 0, overig: 0, totaal: 0};
             dates.push(date_object);
         }
 
@@ -52,11 +43,14 @@ d3.json("payments.json", function(data) {
                     } else if (idProduct == "57cd87343068d0401719d1b3") {
                         element.Spectrum.fris += 1;
                         element.Spectrum.totaal += 1;
-                    } else if (idProduct == "57ed163cc17083e90b377702" || idProduct == "57ed163cc17083e90b377702") {
+                    } else if (idProduct == "57ed163cc17083e90b377702" || idProduct == "57cd8db13068d0401719df2f") {
                         element.Spectrum.speciaalbier += 1;
                         element.Spectrum.totaal += 1;
-                    } else if (idProduct == "57cd874c3068d0401719d1c3" || idProduct == "57fd049b72776cf1033b3578") {
-                        element.Spectrum.overig += 1;
+                    } else if (idProduct == "57cd874c3068d0401719d1c3") {
+                        element.Spectrum.drankoverig += 1;
+                        element.Spectrum.totaal += 1;
+                    } else if (idProduct == "57fd049b72776cf1033b3578") {
+                        element.Spectrum.fris += 1;
                         element.Spectrum.totaal += 1;
                     } else if (idProduct == "57c2b4cb7672fa9201fa0aa9") {
                         element.Congo.bier += 1;
@@ -90,8 +84,11 @@ d3.json("payments.json", function(data) {
                     } else if (idProduct == "57ed163cc17083e90b377702" || idProduct == "57cd8db13068d0401719df2f") {
                         date_object.Spectrum.speciaalbier += 1;
                         date_object.Spectrum.totaal += 1;
-                    } else if (idProduct == "57cd874c3068d0401719d1c3" || idProduct == "57fd049b72776cf1033b3578") {
-                        date_object.Spectrum.overig += 1;
+                    } else if (idProduct == "57cd874c3068d0401719d1c3") {
+                        date_object.Spectrum.drankoverig += 1;
+                        date_object.Spectrum.totaal += 1;
+                    } else if (idProduct == "57fd049b72776cf1033b3578") {
+                        date_object.Spectrum.fris += 1;
                         date_object.Spectrum.totaal += 1;
                     } else if (idProduct == "57c2b4cb7672fa9201fa0aa9") {
                         date_object.Congo.bier += 1;
@@ -106,80 +103,30 @@ d3.json("payments.json", function(data) {
                         date_object.Congo.overig += 1;
                         date_object.Congo.totaal += 1;
                     }
-            });
+                });
             dates.push(date_object);
         }
     });
-        console.log(dates)
+
+    function sortDate(data, prop, asc) {
+        data = data.sort(function(a, b) {
+            if (asc) {
+                return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+            } else {
+                return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+            }
+        })
+    };
+    sortDate(dates, 'date', true);
+    
+    
+    // // map through original json, create new one in dates
+    // var by_date = d3.nest()
+    //     .key(function(d) {  return d.state.on.date; }).sortKeys(d3.ascending)
+    //     .key(function(d) {  return d.products;  })  
+    //     .entries(dates);  
+
+    drawCircles();
 });
 
-d3.json("payments.json", function(data) {
-    
-    // date formats
-    var parseTime = d3.timeParse("%d/%m/%Y");
-    var formatTime = d3.timeFormat("%d/%m");         
-
-    // array to fill with data of correct form
-    var dates = [];
-
-    // filter out bad data
-    var data = data.map(function(d) {
-        if (d.state.on.unix < 1477000800000 || d.state.on.unix > 1482537600000 || d.state.refunded || d.amount.positive || !d.state.on.date) {
-            return false
-        }
-        d.products.map(function(prod) {
-        	var id = prod._id.$oid;
-        	if (id == "57cd872a3068d0401719d1a3" || id == "57cd87343068d0401719d1b3" || id == "57ed163cc17083e90b377702" || id == "57cd874c3068d0401719d1c3" || id == "57fd049b72776cf1033b3578" ||
-        		id == "57c2b4cb7672fa9201fa0aa9" || id == "57c2c8dc9bbbd25d75c124df" || id == "57c2b4f67672fa9201fa0ab6" || id == "57c2b5197672fa9201fa0ace") { 
-        		date = parseTime(d.state.on.date);
-        		if (date != null) {
-	        		d.state.on.date = date.getTime();
-	        		d.products = idToName(id);
-	        		dates.push(d);
-	        	};
-        	};
-        
-        });
-    });
-    
-    // map through original json, create new one in dates
-    var by_date = d3.nest()
-    	.key(function(d) {	return d.state.on.date;	}).sortKeys(d3.ascending)
-    	.key(function(d) {	return d.products;	})  
-    	.entries(dates);  
-        
-    console.log(by_date)
-});
-
-var idToName = function(id) {
-	if (id == "57cd872a3068d0401719d1a3") {
-		var name = "Spectrum_bier";
-		return name;
-	} else if (id == "57cd87343068d0401719d1b3") {
-		var name = "Spectrum_fris";
-		return name;
-	} else if (id == "57ed163cc17083e90b377702" || id == "57cd8db13068d0401719df2f" ) {
-		var name = "Spectrum_speciaalbier";
-		return name;
-	} else if (id == "57cd874c3068d0401719d1c3" || id == "57fd049b72776cf1033b3578") {
-		var name = "Spectrum_overig";
-		return name;
-	} else if (id == "57c2b4cb7672fa9201fa0aa9") {
-		var name = "Congo_bier";
-		return name;
-	} else if (id == "57c2c8dc9bbbd25d75c124df") {
-		var name = "Congo_fris";
-		return name;
-	} else if (id == "57c2b4f67672fa9201fa0ab6") {
-		var name = "Congo_speciaalbier";
-		return name;
-	} else if (id == "57c2b5197672fa9201fa0ace") {
-		var name = "Congo_overig";
-		return name;
-	};
-
-	return id;
-};
-</script>
-
-</body>
+console.log(dates);
