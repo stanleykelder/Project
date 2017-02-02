@@ -10,7 +10,7 @@ files: styling.css
 Alle styling staat in 1 CSS file, met comments waar de styling voor is. Dit vond ik het meest overzichtelijk.
 
 ####Top bar
-files: indes.html
+files: index.html
 
 In de top bar staat rechts mijn naam. Links staat een 'Welkom!'-button met informatie over gebruik van de visualisatie on hover. in het midden staat een button voor Congo en een button voor Spectrum met wat informatie over de verening bij hover. Ook staat hier wat informatie over wat er uit de visualisatie te halen is. Deze top-bar is volledig gemaakt in html.
 
