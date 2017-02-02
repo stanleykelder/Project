@@ -1,40 +1,45 @@
+/*Stanley Kelder
+10313540*/
+
+
+/*change cursor on hover circles*/
 .node {
   cursor: pointer;
 }
 
+/*show border on hover circle*/
 .node:hover {
   stroke: #000;
   stroke-width: 1.5px;
 }
 
+/*make inner circles white*/
 .node--leaf {
   fill: white;
 }
 
+/*text for in circles*/
 .label {
   font: 15px "Helvetica Neue";
   text-anchor: middle;
-  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
 }
 
+/*ake sure pointer doesn't change on text hover and circles stay clickable*/
 .label {
   pointer-events: none;
 }
 
-/*Bar chart*/
+/*Bar chart color*/
 .bar {
   fill: steelblue;
 }
 
+/*bar chart color on hover*/
 .bar:hover {
-  fill: brown;
+  fill: #7fcdbb;
 }
 
-.axis--x path {
-  display: none;
-}
-
-
+/*setting sor tooltip used in bar chart and in circles*/
 .d3-tip {
   line-height: 1;
   padding: 6px;
@@ -64,21 +69,24 @@
   left: 0;
 }
 
+/*Make buttons less bright*/
 .w3-dropdown-hover {
 	opacity: 0.6;
 }
 
+/*line setting linechart*/
 .line {
   fill: none;
-  stroke: green;
   stroke-width: 1.5px;
 }
 
+/*overlay for hover linechart*/
 .overlay {
   fill: none;
   pointer-events: all;
 }
 
+/*crosshair linechart*/
 .focus line {
   fill: none;
   stroke: gray;
