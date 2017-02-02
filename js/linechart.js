@@ -1,12 +1,8 @@
 // Stanley Kelder
 // 10313540
 
-// Opmerking: ik heb voor de assen twee aparte arrays gemaakt. Dit bleek nodig, omdat de
-// data die anders gepakt werd (bijvoorbeeld door d3.extent(data, function(d) { return d.date; }))
-// was de complete json set ipv alleen het deel van desbetreffende stock.
-
+// draw graph without lines
 var drawGraph = function(yDom, prod) {
-    console.log(yDom, prod)
 
     var svg = d3.select("#line-chart"),
     margin = {top: 50, right: 150, bottom: 30, left: 30},
@@ -48,11 +44,11 @@ var drawGraph = function(yDom, prod) {
         .attr("fill", "#000")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
-        .attr("dy", "0.71em")
+        .attr("dy", "0.41em")
         .style("text-anchor", "end")
         .text("Aantal producten");
 
-    // title for graph
+    // title for graph if single product 
     g.append("text")
       .attr("x", (width / 2))             
       .attr("y", 0 - (margin.top / 2))
@@ -62,18 +58,17 @@ var drawGraph = function(yDom, prod) {
       .text(prod);
 
 
-    // create crosshairs
+    // create crosshair
     var focus = g.append("g")
       .attr("class", "focus")
       .style("display", "none");
 
     var bisectDate = d3.bisector(function(d) { return d.date; }).left;
 
-    // vertical crosshair 
     focus.append("line")
           .attr("id", "crosshairX");
 
-    // pop-up text of exact values
+    // text attribute for date on crosshair
     var text = g.append("text")
 
     // drawing of crosshairs and pop-up texts
@@ -87,6 +82,7 @@ var drawGraph = function(yDom, prod) {
       .on("mouseout", function() {
         focus.style("display", "none");
       })
+      // move crosshair with mousemove
       .on("mousemove", function() { 
         var mouse = d3.mouse(this);
         var mouseDate = xScale.invert(mouse[0]);
@@ -96,7 +92,6 @@ var drawGraph = function(yDom, prod) {
         var x = xScale(d);
         var y = yScale(eval("dates[i]." + yDom));
         
-        // since data on x are the same only 1 vertical crosshair is needed
         focus.select("#crosshairX")
             .attr("x1", x)
             .attr("y1", yScale(yDomain[1]))
@@ -108,14 +103,29 @@ var drawGraph = function(yDom, prod) {
             .attr("y", -5)
             .style("stroke", "grey") 
             .text(datum(d));
-     })   
+     });
+
+    // Add names of Congo and Spectrum to legend
+    g.append("text")
+      .attr("x", width + 10)             
+      .attr("y", 20)
+      .attr("text-anchor", "left")  
+      .style("font-size", "30px") 
+      .style("fill", "grey")  
+      .text("Congo");   
+
+    g.append("text")
+      .attr("x", width + 10)             
+      .attr("y", 180)
+      .attr("text-anchor", "left")  
+      .style("font-size", "30px") 
+      .style("fill", "grey")  
+      .text("Spectrum"); 
 
 };
 
-// drawing of lines
+// draw lines in graph
 var drawLine = function (ver, prod, yDom) {
-
-    console.log(prod)
 
     // create area for graph
     var svg = d3.select("#line-chart"),
@@ -130,7 +140,6 @@ var drawLine = function (ver, prod, yDom) {
     var yScale = d3.scaleLinear()
         .rangeRound([height, 0]);
 
-    // domains for axes, with use of datecut and opencut arrays
     xScale.domain(d3.extent(dates, function(d) {
         return d.date;
     }));
@@ -138,17 +147,48 @@ var drawLine = function (ver, prod, yDom) {
         return eval("d." + yDom);
     }));
 
+    // create function to draw line
     var line = d3.line()
     .x(function(d) { return xScale(d.date); })
     .y(function(d) { return yScale(eval("d." + ver + "." + prod)); });
 
+    // draw line
     g.append("path")
     .datum(dates)
     .attr("class", "line")
+    .attr("id", (ver + prod))
     .attr("d", line)
     .style("stroke", eval("colors." + ver + "." + prod))
+
+    // create interactive legend
+    g.append("text")
+      .attr("x", width + 30)             
+      .attr("y", eval("legendY." + ver + "." + prod))
+      .attr("text-anchor", "left")  
+      .attr("class", "legend")
+      .attr("id", ("text" + ver + prod))
+      .style("font-size", "20px") 
+      .style("fill", eval("colors." + ver + "." + prod))  
+      .on("click", function(){
+        var active   = this.active ? false : true,
+        newOpacity = active ? 0 : 1; 
+        textOpacity = active ? 0.2 : 1;
+        // Hide or show the elements based on the ID
+        d3.select("#"+ ver + prod)
+            .style("opacity", newOpacity); 
+        this.active = active;
+        // change opacity of word in legend to see if line is active or not
+        d3.select("#text"+ ver + prod)
+            .style("opacity", textOpacity)
+        })
+      .text(prod);
+
 };
 
 // color per product
-var colors = {Congo: {bier: "#00441b", fris: "#238b45", speciaalbier: "#74c476", overig: "#d9f0a3"},
-              Spectrum: {bier: "#023858", fris: "#045a8d", speciaalbier: "#4292c6", overig: "#9ecae1"}};
+var colors = {Congo: {bier: "#00441b", fris: "#238b45", speciaalbier: "#74c476", overig: "#a1d99b"},
+              Spectrum: {bier: "#023858", fris: "#4292c6", speciaalbier: "#9ecae1"}};
+
+// Yvalues of words in legend
+var legendY = {Congo: {bier: "50", fris: "80", speciaalbier: "110", overig: "140"},
+              Spectrum: {bier: "210", fris: "240", speciaalbier: "270", overig: "300"}};

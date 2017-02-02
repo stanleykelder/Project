@@ -1,43 +1,62 @@
-Process book:
+Stanley Kelder
+10313540
 
-Week 1
+#Process book:
 
-Day:
-#1 	Contact gezocht voor verkrijgen data. Plan opgezet van opzet visualisatie.
-#2	Link naar data verkregen. Onderzoek gedaan naar SSH.
-#3	Data onderzocht mbv RoboMongo. Met Bas gebrainstormd over de visualisatie en originele plan veranderd.
-#4	Data verder onderzocht met RoboMongo. Ingelezen in MongoDB
-#5	Nieuwe plan van visualisatie afgewerkt. Relevante data omgezet tot JSON mbv MongoChef. (Yes, gelukt!)
+##Week 1
+
+###Day:
+####1 	
+Contact gezocht voor verkrijgen data. Plan opgezet van opzet visualisatie.
+####2	
+Link naar data verkregen. Onderzoek gedaan naar SSH.
+####3	
+Data onderzocht mbv RoboMongo. Met Bas gebrainstormd over de visualisatie en originele plan veranderd.
+####4	
+Data verder onderzocht met RoboMongo. Ingelezen in MongoDB
+####5
+Nieuwe plan van visualisatie afgewerkt. Relevante data omgezet tot JSON mbv MongoChef. (Yes, gelukt!)
 
 Week 2
 
 Day:
-#1	Started coding. First steps of packed circles, but struggling with right form of JSON.
-#2	Created packed circles
-#3	sick :(
-#4	Started on the line graph
-#5	Continued on line graph and presentation
+####1	
+Begonnen met coden. Eerste stappen van de packed circles, maar het lukt me nog niet zo goed om de JSON in een juist formaat te krijgen.
+####2	
+De packed circles zijn gelukt, de eerste visualisatie is gemaakt! Helaas nog wel met dummy data.
+####3	
+ziek :(
+####4	
+Vandaag begonnen met de lijngrafiek. Ik heb een oude opdracht van dataprocessing erbij gepakt waar een lijngrafiek met meerdere lijnen getekend moest worden, omdat er uiteindelijk ook meerdere lijnen in deze 	grafiek zullen moeten komen.
+####5	
+Ik ben verder gegaan met de lijngrafiek. Mijn javascript van de oude opdracht was een redelijke puinzooi. Ik heb ook besloten om een aparte script te maken om de data in te laden. Hier zet ik de data dan ook 	meteen om in een manier die makkelijker te gebruiken is. En presentatie.
 
 Week 3
 
 Day:
-#1	The line graph looks nice. However, I'm not sure how to link it to the circles. They seem to need a complete different form of datasets.
-#2	I tried bootstrapping my page. With no luck.. Apparently bootstrap and D3 don't go that well together. I then tried D3.nest to be able to use the same dataset for my circles and my line, but also without luck.
-	A day of hard work, but without progression..
-#3	I started out a bit eager on D3.nest to work, but eventualy I have decided I do not need the same dataset for both visualisations. I just pre-make the one for the circles. This one is now so small you don't even know it's loading. 
-	Would have saved me an entire day if I had made this decision earlier. 
-#4	The circles and the lines are linked! I need to start doing my barchart, but I hope that will be easy. I'm now fine tuning the lay-out of my circles.
-#5	The circles look good! They zoom in allright and the link with the line graph works smooth. I have made sure the axes change when the variables change. It's time for the bar chart! But firts a presentation.
+####1	
+De lijngrafiek werkt volgens mij, maar de data is nog steeds niet helemaal goed. Het lukt me maar niet om de data echt goed te krijgen. 's Avonds heeft iemand die mij de data heeft gegeven geholpen met de onjuiste data eruit filteren. De lijn grafiek ziet er nu goed uit! Ik weet alleen nog niet hoe ik deze moet linken aan de cirkels.
+####2	
+Geprobeerd mijn pagina in bootstrap te zetten. Blijkbaar gaan bootstrap en D3 echter niet zo goed samen dus ik heb het opgegeven. Daarna heb ik geprobeerd om met d3.nest de data te groeperen zodat ik dezelde 	data-array zou kunnen gebruiken voor de cirkels en de lijngrafiek, maar ook dit is niet gelukt. Tim heeft mij aangeraden gewoon twee losse datasets te blijven gebruiken. Een lange dag met zeer weining resultaat..	
+####3	
+Na het advies van Tim mijn tweede dataset maar zelf met de hand gemaakt. Het werkt wel makkelijk op deze manier. Als ik dit meteen had gedaan had mij dat een hoop tijd gescheeld. Ik ben bezig de cirkels aan de lijngrafiek te linken, maar het werkt nog niet helemaal.
+####4	
+Het is gelukt om de cirkels en de lijngrafiek te linken! Het ziet er al mooit uit, alleen de assen veranderen nog niet mee. Er worden nu meerdere assen overal elkaar heen getekend als er meerdere lijnen 
+####5	
+Ik heb een aparte functie gemaakt om de assen te tekenen die ik maar 1 keer aanroep per keer dat de grafiek getekend moet worden. Op deze manier worden er niet verschillende assen over elkaar heen getekend. Het is me hiermee ook gelukt om de assen de juiste schaal mee te geven, afhankelijk van de lijnen die erin getekend worden. Ik had eigenlijk nu een beta-versie moeten hebben, maar dat is niet gelukt. Mijn doel is om dat maandag te hebben. 
 
-#6	Time to work on Saturday, the bar chart has to be created. I wanted to show details about the users in the bar chart, but I have decided on showing the weekdays. This way I don't need to load in another big JSON with all user accounts. 
-	Saves me a lot of time. I have created the bar chart, but I need to think of something new for the dropdown now.
-#7  A little programming on Sunday. I have decided to make a dropdown to switch between max, mean and total values. I made a to-do-list for coming days. I've got some long days ahead of me!
+####6	
+Wat weekendwerk vandaag! De staafdiagram moet gemaakt worden. Ik wilde eigenlijk gebruikers vergelijken in de staafdiagram, maar ik heb besloten dat dat te hoog gegrepen is. Dan moet ik nog een keer zo'n grote JSON om zit te zetten en ook nog linken.. In plaats daarvan heb ik besloten de verschillende dagen van de week weer te geven in de staafdiagram. De staafdiagram is gemaakt, het was inderdaad niet moeilijk gelukkig. Ik moet alleen nog iets bedenken wat ik met een dropdown zou kunnen doen hierbij.
+#7  
+En ook op zondag wat programmeren. Ik moet toch die beta-versie een keer hebben. Ik heb besloten een dropdown te maken waarin gekozen kan worden tussen maximale, gemiddelde en totale waardes per dag van de week. Ik zal nog een hoop te doen hebben komende dagen!
 
 Week 4
 Day:
-#1	Linked the bar chart to the circles. Finishing touch on the bar chart: change axes on update and listen for dropdown change. Finishing touch on line graph: crosshair showing day and date. I want a clickable legend, but I'm not sure I 		could do this in time.
-#2	Finishing touch on circles: created tooltip on hover. I realized my code is a bit of a mess, so I started trying cleaning things up a bit. I also still appear to have some bugs. Overig in circles is not linked to anything and when 
-	clicked on a product circle there is nowhere shown what you have clicked. So I made a dynamic title on the line chart, functioning as an overall title.
-#3	No more coding according to Martijn. Well yeah.. I created drop down menus in the top bar for information. I want these buttons to show what vereniging is clicked, but that I will do if I finish everything on time. Tidied my Githun and
-	created my personal git website.
-#4	FINAL DAY! 
+####1	
+Ik heb de staafdiagram gelinkt aan de cirkels. De dropdown werkt ook en de assen schalen mee. Bij de lijndiagram heb ik een crosshair toegevoegd die de datum en de dag laat zien. Ik wil graag een klikbare legenda bij de lijndiagram, maar ik weet niet of ik daar wel genoeg tijd voor ga hebben.
+####2	
+Ik heb de tooltip ook toegevoegd aan de cirkels zodat er altijd gezien kan worden welke cirkel welke data representeert. Het heeft me twee weken gefrustreerd dat dat niet zo was, maar nu werkt het! Ook heb ik een titel toegevoegd aan de lijndiagram die laat zien welk product wordt weergegeven. Ik ben	begonnen met het opschonen van mijn code, want dat is nog wat warrig en chaotisch. 
+####3	
+Stoppen met coden zegt Martijn. Tsja.. Ik heb drop downs gemaakt in de top bar om informatie te kunnen geven. Ik bedacht me alleen wel dat dit waarschijnlijk niet als tweede interactieve componet geldt. Dat wordt dan toch de interactieve legenda maken morgen. Verder heb ik mijn Githun wat opgeruimd en mijn eigen git website gemaakt. En veel puntjes op de i gezet natuurlijk.
+####4	
+LAATSTE DAG! Nog een heleboel puntjes op een hoop i'tjes gezet. En het is me gelukt om een interactieve legenda te maken, ik ben er erg tevreden mee! Ik ben sowieso erg tevreden over het eindresultaat. Nou hopen dat de nakijkers dat ok zijn! 

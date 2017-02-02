@@ -1,3 +1,6 @@
+<!-- Stanley Kelder
+10313540 -->
+
 <!DOCTYPE html>
 <html>
 
@@ -19,7 +22,6 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 
 <!-- Top container -->
 <div class="w3-container w3-large w3-padding" style="height: 150px">
-  <!-- <button class="w3-btn w3-hide-large w3-padding-0 w3-hover-text-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button> -->
   <div class="w3-third">  
     <div class="w3-dropdown-hover">
         <div class="w3-container w3-blue-grey w3-padding-16" style="width: 400px">
@@ -27,7 +29,12 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
           <center><h1>Welkom!</h1></center>
         </div>
         <div class="w3-dropdown-content w3-card-4" style="width:400px">
-        <p> infooooo Vis </p>
+        <p> Deze visualisatie geeft weer wat er voor aankopen worden gedaan op de tablet bij Congo en Spectrum.
+            Klik op een cirkel om een lijngrafiek te zien van alle data die die cirkel omvat. Klik je op een witte cirkel
+            dan krijg je ook een staafdiagram te zien met een visualisatie van het consumptiegedrag per dag van de week.
+            </br></br>
+            Beweeg vooral je muis lekker! Er komen vaak getalletje of namen tevoorschijn als je met de muis ergens overheen gaat.
+            Verandert de muis in een pointer? Dan kan je erop klikken!</p>
         </div>
     </div>
   </div>
@@ -38,7 +45,11 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
           <center><h1>Congo</h1></center>
         </div>
         <div class="w3-dropdown-content w3-card-4" style="width:400px">
-        <p> infooooo Congooo </p>
+        <p> Congo is de studievereniging van de biologen. Kijk eens op de website van Congo!<a href="http://www.congo.eu">congo.eu</a>
+        <!-- </br></br> -->
+            Congo borrelt op dinsdagen. Daarnaast is er op vrijdagmiddag de VrijMiBo, dan borrelen ze in hun eigen kamer.
+            Kijk maar eens goed naar de grafieken!
+        </p>
         </div>
     </div>
   </div>
@@ -49,7 +60,9 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
           <center><h1>Spectrum</h1></center>
         </div>
         <div class="w3-dropdown-content w3-card-4" style="width:400px">
-        <p> infooooo Spectrum </p>
+        <p> Spectrum is de studievereniging van de interdisciplinaire studenten. Kijk eens op de website van Spectrum! <a href="http://www.svspectrum.nl">svspectrum.nl</a>
+        Spectrum borrelt op woensdag. Verder wordt er in het weekend voor de tentamenweek nog wel eens een blike frisdrank gehaald bij Spectrum.
+        </p>
         </div>
     </div>
   </div>
@@ -75,7 +88,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         </div>
         <div class="w3-display-container">
           <h5></h5>
-          <div class="w3-padding-32 w3-display-topright">
+          <div class="w3-padding-32 w3-display-topright" id="dropselect">
             <select id="dropdown">
               <option value="max" selected="selected">Maximum</option>
               <option value="avg">Gemiddelde</option>

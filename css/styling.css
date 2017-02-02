@@ -1,7 +1,6 @@
 /*Stanley Kelder
 10313540*/
 
-
 /*change cursor on hover circles*/
 .node {
   cursor: pointer;
@@ -71,7 +70,8 @@
 
 /*Make buttons less bright*/
 .w3-dropdown-hover {
-	opacity: 0.6;
+	cursor: default;
+  opacity: 0.6;
 }
 
 /*line setting linechart*/
@@ -93,3 +93,7 @@
   opacity: 0.5;
 }
 
+/*change cursor to pointer on legend words*/
+.legend {
+  cursor: pointer;
+}

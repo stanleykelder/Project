@@ -1,4 +1,5 @@
-EDIT: Data klopt nog, visualisatie is veranderd. Zie drankconsumptie.png in images.
+Stanley Kelder
+10313540
 
 # Project
 Minor programmeren
@@ -16,9 +17,9 @@ Bij een hover over een van de buttons verschijnt er een dropdown met informatie.
 
 ###Line graph:
 De line graph laat het verloop over de tijd zien van de consumpties die vallen binnen de cirkel die is aangeklikt. Dit kan varieren van een lijn van een product in een vereniging tot een grafiek met alle lijnen als de buitenste cirkel wordt aangeklikt. 
-![alt text](https://github.com/stanleykelder/Project/blob/master/doc/Linegraph.png "Linegraph")
+![alt text](https://github.com/stanleykelder/Project/blob/master/doc/Linechart.png "Linechart")
 
 ###Bar chart
 Klik je een specifiek product aan bij de cirkels dan verschijnt er een staafdiagram met de waardes per dag van de week. In een dropdown kan gekozen worden tussen maximum, gemiddelde of totaal waardes. 
-![alt text](https://github.com/stanleykelder/Project/blob/master/doc/Barchart.png "Barchart")
+![alt text](https://github.com/stanleykelder/Project/blob/master/doc/barchart.png "Barchart")
 
