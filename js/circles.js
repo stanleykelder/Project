@@ -155,7 +155,7 @@ var pack = d3.pack()
       var prod = d.data.name.toLowerCase();
       yDom = ver + "." + prod;
       drawLine(ver, prod, yDom);
-      drawGraph(yDom);
+      drawGraph(yDom, prod);
       drawBarchart(ver, prod, d3.select('#dropdown').property('value'));
     }
   }

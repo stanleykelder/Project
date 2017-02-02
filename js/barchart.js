@@ -1,7 +1,6 @@
 var drawBarchart = function(ver, prod, type) {
 
-console.log(ver, prod, type)
-
+// format unix time to day of week
 var weekday = d3.timeFormat("%A");
 
 var svg = d3.select("#barchart"),
@@ -9,6 +8,7 @@ var svg = d3.select("#barchart"),
     width = +svg.attr("width") - margin.left - margin.right,
     height = +svg.attr("height") - margin.top - margin.bottom;
 
+// create tooltip
 var tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
@@ -17,13 +17,16 @@ var tip = d3.tip()
   });
 svg.call(tip);
 
+// scale axes
 var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
     y = d3.scaleLinear().rangeRound([height, 0]);
 
+// create dataset for barhart
 var nestdata = dates.map(function(d) {
   return {day: weekday(d.date), amount: eval("d." + ver + "." + prod)};
 });
 
+// use nest to get max, total and average value per product
 var nest = d3.nest()
   .key(function(d){ return d.day; })
   .rollup(function(v) { return {
@@ -33,49 +36,35 @@ var nest = d3.nest()
   }; })
   .entries(nestdata)
 
-
 var g = svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  x.domain(nest.map(function(d) { return d.key; }));
-  y.domain([0, d3.max(nest, function(d) { return eval("d.value." + type); })]);
+// draw the axes
+var drawAxes = function(type) {
+    x.domain(nest.map(function(d) { return d.key; }));
+    y.domain([0, d3.max(nest, function(d) { return eval("d.value." + type); })]);
 
-  g.append("g")
+    g.append("g")
       .attr("class", "axis axis--x")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x));
   
-  g.append("g")
-      .attr("class", "axis axis--y")
-      .call(d3.axisLeft(y).ticks(10))
-    .append("text")
-      .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", "0.71em")
-      .attr("text-anchor", "end")
-      .text("gooone");
+    g.append("g")
+        .attr("class", "y axis")
+        .call(d3.axisLeft(y))
+      .append("text")
+        .attr("fill", "#000")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", "0.71em")
+        .style("text-anchor", "end")
+        .text("Aantal producten");
+  }
 
-  g.selectAll(".bar")
-    .data(nest)
-    .enter().append("rect")
-      .attr("class", "bar")
-      .attr("x", function(d) { return x(d.key); })
-      .attr("y", function(d) { return y(eval("d.value." + type)); })
-      .attr("width", x.bandwidth())
-      .attr("height", function(d) { return height - y(eval("d.value." + type)); })
-      .sort()
-      .on('mouseover', tip.show)
-      .on('mouseout', tip.hide);
+  drawAxes(type);
 
-  d3.select('#dropdown')
-    .on("change", function(){
-      g.selectAll("*").remove();
-      var newData = d3.select(this).property('value');
-      newAxes(newData);
-      newBars(newData);
-    });
-
-  var newBars = function(type) {
+  // draw the bars
+  var drawBars = function(type) {
     var tip = d3.tip()
       .attr('class', 'd3-tip')
       .offset([-10, 0])
@@ -97,25 +86,19 @@ var g = svg.append("g")
       .on('mouseout', tip.hide);
   }
   
-  var newAxes = function(type) {
-    x.domain(nest.map(function(d) { return d.key; }));
-    y.domain([0, d3.max(nest, function(d) { return eval("d.value." + type); })]);
+  drawBars(type);
 
-    g.append("g")
-      .attr("class", "axis axis--x")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+  // change graph when dropdown changes
+  d3.select('#dropdown')
+    .on("change", function(){
+      g.selectAll("*").remove();
+      var newData = d3.select(this).property('value');
+      drawAxes(newData);
+      drawBars(newData);
+    });
+
   
-    g.append("g")
-        .attr("class", "axis axis--y")
-        .call(d3.axisLeft(y).ticks(10))
-      .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", "0.71em")
-        .attr("text-anchor", "end")
-        .text("gooone");
-  }
+  
 };
 
 

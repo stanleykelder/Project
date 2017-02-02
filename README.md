@@ -6,23 +6,19 @@ Minor programmeren
 #Drinkgedrag Congo en Spectrum
 
 ###Data:
-Van 7 avonden is er data over mensen hun drinkgedrag. Deze data bestaan uit gemiddeld 1500 transacties van 200 mensen per avond
+Van 23-10-2016 tot 23-12-2016 zijn er gegevens van de aankopen gedaan per tablet bij de studieverenigingen Congo en Spectrum.
 
+###Startpagina:
+Bij het laden van de pagina is het volgende scherm te zien:
+![alt text](https://github.com/stanleykelder/Project/blob/master/doc/Startpagina.png "Startpagina")
 
-###Landingspagina:
-Op de landingspagina zijn de logo’s te zien van de studieverenigingen. Als je hierop klikt kom je bij de statistieken per studievereniging. Hieronder is een balk weergegeven waarbij je met behulp van een dropdown menu twee dingen tussen de studieverenigingen kan vergelijken. In het voorbeeld op de afbeelding is dat bijvoorbeeld de bierconsumptie op het Eerstejaarsweekend.
+Bij een hover over een van de buttons verschijnt er een dropdown met informatie. Bij welkom informatie over de visualisatie in het algemeen en bij de verenigingen informatie over de vereninging. Door te klikken op de cirkels verschijnen de andere visualisaties. De cirkels zoomen in (of uit) naar de plek waar op wordt geklikt.
 
-###Per studievereniging:
-Per studievereniging is er een multiline graph te zien waarin elke lijn een datum voorstelt en op de assen de tijd en het bedrag dat is uitgegeven staan.
+###Line graph:
+De line graph laat het verloop over de tijd zien van de consumpties die vallen binnen de cirkel die is aangeklikt. Dit kan varieren van een lijn van een product in een vereniging tot een grafiek met alle lijnen als de buitenste cirkel wordt aangeklikt. 
+![alt text](https://github.com/stanleykelder/Project/blob/master/doc/Linegraph.png "Linegraph")
 
-Klik je op 1 van de lijnen dan gebeuren er 2 dingen:
+###Bar chart
+Klik je een specifiek product aan bij de cirkels dan verschijnt er een staafdiagram met de waardes per dag van de week. In een dropdown kan gekozen worden tussen maximum, gemiddelde of totaal waardes. 
+![alt text](https://github.com/stanleykelder/Project/blob/master/doc/Barchart.png "Barchart")
 
-1.	Dan krijg je de statistieken te zien van die dag in een bar graph (totaal besteed, totaal consumpties, totaal unieke besteders, totaal groepsbetalingen, ...).
-
-2.	Dan begint de feestsimulatie te draaien. Personen worden weergegeven in bolletjes, elke keer als een uniek persoon een eerste betaling heeft gedaan verschijnt deze als bolletje in de ruimte. Elke extra betaling gaat het bolletje iets meer heen en weer bewegen. Wanneer groepsbetaling worden gedaan bewegen desbetreffende bolletjes na elkaar toe. Zo wordt door de tijd heengelopen. 
-
-####Afbeelding landingspagina 
-![alt text](https://github.com/stanleykelder/Project/blob/master/progplan1.png "Landingspagina")
-
-####Afbeelding studieverenigingspagina
-![alt text](https://github.com/stanleykelder/Project/blob/master/progplan2.png "Pagina studievereniging")
