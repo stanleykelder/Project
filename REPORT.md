@@ -49,6 +49,9 @@ De staafdiagram wordt gemaakt als er op een witte cirkel wordt geklikt. Daarbij 
 ####Kleurkeuze
 De kleuren van Congo en Spectrum zijn respectievelijk groen en blauw. Daarom heb ik ook gekozen om de visualisaties in deze kleuren te houden. Ik heb ervoor gekozen om verder alleen maar grijstinten te gebruiken. Dit vond ik het mooist overkomnen.
 
+####Intuitief
+Ik heb geprobeerd het gebruik van de visualisatie zo intuitief mogelijk te laten zijn. Zo verandert bijvoorbeeld de cursor altijd in een pointer als je kan klikken, en verandert hij anders niet in een pointer. Onder de welkom knop heb ik verder uitleg gegeven hoe de visualisatie in elkaar zit en onder de knoppen van de studieverenigingen een korte uitleg over wat voor verenigingen het zijn, met link naar hun website en enkele grappige dingen die je uit de visualisatie kan halen.
+
 ####W3 template
 Voor de algemene css, de opmaak van de pagina, heb ik een template gebruikt van W3schools. Onderaan de pagina heb ik een vermelding hiervan laten staan. Ik heb dit in eerste instantie gebruikt zodat de grafieken niet zouden overlappen bij het inzoomen, maar dat ben ik op een gegeven moment uit het oog verloren en toen was deze functionaliteit verloren. Omdat ik het toen toch al allemaal in deze template had gemaakt, en ik het er verder mooi uit vind zien, heb ik besloten dit wel te behouden.
 
@@ -63,6 +66,8 @@ Het perfecte product zou verder niet een JSON inlezen maar gekoppeld zijn aan ee
 Verder kan de css ook nog beter. Op telefoons zijn de hoverbuttons niet te zien, en op een laptop is de visualisatie niet goed scalable. 
 
 En nog een puntje dat gedaan zou moeten worden. Er worden nu bepaalde data overgeslagen omdat die niet voorkomen in de dataset. Hier wordt tussen geinterpoleerd in de lijndiagram maar dat geeft een verkeerd beeld. Deze ontbrekende data zouden moeten worden toegevoegd met 0 waardes aan de dataset.
+
+Als laatste, en tevens het eerste wat ik zou implementeren: de dropdown moet verdwijnen als de staafdiagram niet in beeld is. Nu staat de dropdown er altijd, terwijl hij alleen nut heeft als de staafdiagram er is, dat is vervelend.
 
 Ik heb al gehoord dat de verenigingen de visualisaties wel interessant vinden. Misschien ga ik deze punten dus nog wel verwerken in de toekomst zodat mijn visualisaties gebruit kunnen worden door de verenigingen!
 

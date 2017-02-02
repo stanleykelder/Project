@@ -1,4 +1,5 @@
 Stanley Kelder
+
 10313540
 
 #Process book:
@@ -47,7 +48,7 @@ Ik heb een aparte functie gemaakt om de assen te tekenen die ik maar 1 keer aanr
 
 ####6	
 Wat weekendwerk vandaag! De staafdiagram moet gemaakt worden. Ik wilde eigenlijk gebruikers vergelijken in de staafdiagram, maar ik heb besloten dat dat te hoog gegrepen is. Dan moet ik nog een keer zo'n grote JSON om zit te zetten en ook nog linken.. In plaats daarvan heb ik besloten de verschillende dagen van de week weer te geven in de staafdiagram. De staafdiagram is gemaakt, het was inderdaad niet moeilijk gelukkig. Ik moet alleen nog iets bedenken wat ik met een dropdown zou kunnen doen hierbij.
-#7  
+####7  
 En ook op zondag wat programmeren. Ik moet toch die beta-versie een keer hebben. Ik heb besloten een dropdown te maken waarin gekozen kan worden tussen maximale, gemiddelde en totale waardes per dag van de week. Ik zal nog een hoop te doen hebben komende dagen!
 
 ##Week 4
